@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+                                 https://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+
+    <persistence-unit name="gestion-reservations" transaction-type="RESOURCE_LOCAL">
+        <!-- Provider Hibernate JPA -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Liste explicite des entités (optionnel si discovery automatique fonctionne) -->
+        <class>com.example.model.Utilisateur</class>
+        <class>com.example.model.Salle</class>
+        <class>com.example.model.Reservation</class>
+        <class>com.example.model.Equipement</class>
+
+        <!-- Propriétés de connexion et Hibernate -->
+        <properties>
+            <!-- Connexion H2 (mémoire) -->
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+
+            <!-- Dialecte Hibernate pour H2 -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+
+            <!-- Création/gestion du schéma : create-drop pour DEV (changez en 'update' ou 'none' en prod) -->
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+
+            <!-- Affichage SQL -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+            <!-- Optionnel : niveau de log des paramètres liées aux types (utile pour debug) -->
+            <property name="hibernate.use_sql_comments" value="true"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>
